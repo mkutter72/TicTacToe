@@ -1,12 +1,11 @@
 
 
-/*
+
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
-*/
 
 body{
   background: url("background.jpg");
@@ -28,17 +27,13 @@ h1 {
 }
 
 
-.one {
-  height: 340px;
-  max-width: 340px;
-  border: 10px grey solid;
-
+.boardImage {
+  height: 370px;
+  max-width: 370px;
   margin : 30px auto;
-  background-color: lightblue;
-
   position: relative;
   top :20px;
-  left :-150px;
+  left :-120px;
 }
 
 
@@ -48,12 +43,15 @@ clear : left;
 
 
 .square {
-   height: 95px;
-  width: 95px;
-  background-color: lavender;
-  margin :5px;
+  height: 100px;
+  width: 100px;
   float : left;
-  font-size: 45px;
+  font-size: 80px;
+  font-style: bold;
+  color: midnightblue;
+  text-align: center;
+  vertical-align: middle;
+  border : 2px black solid;
 }
 
 
@@ -63,25 +61,27 @@ clear : left;
   height: 500px;
   width: 700px;
   background-color : none;
-  border :5px blue solid;
 }
 
-.tiny {
-  position: relative;
-  top :20px;
-  left :20px;
-  height :30px;
-  width: 30px;
-  background-color: pink;
-}
 
 .newGame{
   position: relative;
   left : 420px;
-  top : -70px;
+  top : -130px;
+  font-size: 20px;
   height : 50px;
-  width: 100px;
+  width: 150px;
   border: 2px solid;
-    border-radius: 10px;
+  border-radius: 10px;
+  background-color: white;
+}
 
+.winnerStatus{
+  position: relative;
+  left : 420px;
+  top : -240px;
+  height : 50px;
+  width: 400px;
+  font-size: 40px;
+  color : darkslategray;
 }

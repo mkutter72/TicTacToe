@@ -6,25 +6,9 @@ var board = [ [null, null, null],
             ];
 
 
-function clearBoard(){
-  var aSquare = document.getElementById('C00');
-  aSquare.textContent = '';
-  aSquare = document.getElementById('C01');
-  aSquare.textContent = '';
-  aSquare = document.getElementById('C02');
-  aSquare.textContent = '';
-  aSquare = document.getElementById('C10');
-  aSquare.textContent = '';
-  aSquare = document.getElementById('C11');
-  aSquare.textContent = '';
-  aSquare = document.getElementById('C12');
-  aSquare.textContent = '';
-  aSquare = document.getElementById('C20');
-  aSquare.textContent = '';
-  aSquare = document.getElementById('C21');
-  aSquare.textContent = '';
-  aSquare = document.getElementById('C22');
-  aSquare.textContent = '';
+var clearBoard = function (){
+  $('.boardImage > div').text('');
+  $('.winnerStatus').text('');
 
   for (var rowcnt = 0; rowcnt < board.length; rowcnt++)
     for (var colcnt = 0; colcnt < board[0].length; colcnt++)
@@ -35,7 +19,9 @@ function clearBoard(){
 function checkForWinner()
 {
    var nullCnt = 0;
-      // check all rows
+
+   // check all rows. While you are doing row count the number of nulls
+   // if all squares are filled and there is no winner, it's a draw.
    for (var i = 0; i < board.length; i++){
       for (var j = 0;j < board[0].length ; j++)
         if (!board[i][j])
@@ -64,111 +50,65 @@ function checkForWinner()
 }
 
 function turnOnEvents(liClickHandler){
-  var aSquare = document.getElementById('C00');
-aSquare.addEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C01');
-aSquare.addEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C02');
-aSquare.addEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C10');
-aSquare.addEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C11');
-aSquare.addEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C12');
-aSquare.addEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C20');
-aSquare.addEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C21');
-aSquare.addEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C22');
-aSquare.addEventListener('click', liClickHandler);
+  $('.boardImage > div').on('click',liClickHandler);
 }
 
 function turnOffEvents(liClickHandler)
 {
-   var aSquare = document.getElementById('C00');
-aSquare.removeEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C01');
-aSquare.removeEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C02');
-aSquare.removeEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C10');
-aSquare.removeEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C11');
-aSquare.removeEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C12');
-aSquare.removeEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C20');
-aSquare.removeEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C21');
-aSquare.removeEventListener('click', liClickHandler);
-
-var aSquare = document.getElementById('C22');
-aSquare.removeEventListener('click', liClickHandler);
+  $('.boardImage > div').off('click',liClickHandler);
 }
 
 var init = function init() {
 
-var player = 'O';
+  var player = 'O';
 
-var liClickHandler = function liClick(event) {
-    event.target.textContent = ' ' + player;
+  var liClickHandler = function liClick(event) {
+    event.target.textContent = player;
+    var idStr = event.target.id;
 
-  var idStr = event.currentTarget.id;
-  var aSquare = document.getElementById(idStr);
-  aSquare.removeEventListener('click', liClickHandler);
+    // Since the square has been selected,  turn the click handler off
+    $('#'+idStr).off('click',liClickHandler);
 
-  var row = parseInt(idStr[1]);
-  var col = parseInt(idStr[2]);
-  board [row][col] = player;
+    var row = parseInt(idStr[1]);
+    var col = parseInt(idStr[2]);
+    board [row][col] = player;
 
-  var winner = checkForWinner();
-  if (winner){
-    alert("We have a winner!" + winner);
-    turnOffEvents(liClickHandler);
-  }
+    $('.winnerStatus').text('');
 
+    var winner = checkForWinner();
+    if (winner){
+      if (winner === 'Draw'){
+        $('.winnerStatus').text('The game is a draw');
+      } else {
+        $('.winnerStatus').text('Player ' + player  +' has won!');
+      }
 
-  if (player === 'O')
+      turnOffEvents(liClickHandler);
+      }
+
+    if (player === 'O')
       player = 'X';
     else
-      player = 'O';
+       player = 'O';
   };
 
 
 
-function newGameClick(event) {
-  clearBoard();
-  turnOffEvents(liClickHandler);
+  function newGameClick(event) {
+    clearBoard();
+    turnOffEvents(liClickHandler);
+    turnOnEvents(liClickHandler);
+
+    // Reset the focus off the button
+    $('.newGame').blur();
+    $('.winnerStatus').text('Player ' + player + ' goes first');
+    }
+
+
+  // The real actions of the init() function
+  $('.newGame').on('click',newGameClick);
   turnOnEvents(liClickHandler);
-  var newGameButton = document.getElementById('newG');
-  newGameButton.blur();
-
-}
-
-
-   var newGameButton = document.getElementById('newG');
-    newGameButton.addEventListener('click', newGameClick);
-
-
-turnOnEvents(liClickHandler);
-
-
-};
+  $('.winnerStatus').text('Player ' + player + ' goes first');
+  };
 
 init();
