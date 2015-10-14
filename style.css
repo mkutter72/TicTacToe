@@ -61,6 +61,8 @@ clear : left;
   height: 500px;
   width: 700px;
   background-color : none;
+  /*visibility: hidden;*/
+  display: none;
 }
 
 
@@ -84,4 +86,10 @@ clear : left;
   width: 400px;
   font-size: 40px;
   color : darkslategray;
+}
+
+#result {
+  height: 60ex;
+  width: 90%;
+  margin: 0 auto;
 }

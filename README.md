@@ -1,28 +1,30 @@
-Roles for the TicTacToe Game
+#README for TicTacToe
 
-Player
-Board
-Square
+##Roles for the TicTacToe Game
 
-User Stories
+1. Player
+1. Board
+1. Square
 
-Player - as a player I want to:
+##User Stories
+
+###Player - as a player I want to:
 -Start a new game
 -Pick a square on the board to place my next move
 
-Board - as board I want to:
+###Board - as board I want to:
 -Clear the board
 -Determine if a player has won or if there is a draw
 -Set a specific square with a specific playing indicator
 
 
-Square - as a square I want to:
+###Square - as a square I want to:
 -Display either an X or O
 -Disable being changed after I have been set
 -Re-enable allowing changes
 
 
-Design Choices
+##Design Choices
 The board used for tracking moves will be represented by a 3x3 array
 
 Definition of a win.   A player is considered a winner if they have any of the following combinations

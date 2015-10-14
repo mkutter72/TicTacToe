@@ -73,6 +73,9 @@ var init = function init() {
     var col = parseInt(idStr[2]);
     board [row][col] = player;
 
+
+    gameExtras.ajaxMarkCell(event,(row*3)+col,player);
+
     $('.winnerStatus').text('');
 
     var winner = checkForWinner();
@@ -95,6 +98,7 @@ var init = function init() {
 
 
   function newGameClick(event) {
+    gameExtras.ajaxEndCurentGame(event);
     clearBoard();
     turnOffEvents(liClickHandler);
     turnOnEvents(liClickHandler);
@@ -102,6 +106,7 @@ var init = function init() {
     // Reset the focus off the button
     $('.newGame').blur();
     $('.winnerStatus').text('Player ' + player + ' goes first');
+    gameExtras.ajaxCreateNewGame(event);
     }
 
 
@@ -109,6 +114,8 @@ var init = function init() {
   $('.newGame').on('click',newGameClick);
   turnOnEvents(liClickHandler);
   $('.winnerStatus').text('Player ' + player + ' goes first');
+
   };
+
 
 init();
