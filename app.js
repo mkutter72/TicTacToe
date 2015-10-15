@@ -102,6 +102,7 @@ var initializeGame = function () {
       }
 
       turnOffEvents(liClickHandler);
+      gameExtras.ajaxEndCurentGame(event);
       }
 
     if (gameExtras.singleMode){
@@ -118,7 +119,7 @@ var initializeGame = function () {
 
   var newGameClick = function (event) {
     gameExtras.player = 'X'
-    gameExtras.ajaxEndCurentGame(event);
+
     board.clearBoard();
 
     $('.boardImage > div').text('');

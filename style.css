@@ -82,8 +82,20 @@ clear : left;
 
 
 #result {
-  height: 60ex;
-  width: 90%;
+  height: 200px;
+  width: 400px;
   margin: 0 auto;
+  display : none;
 }
 
+#join-game {
+  display : none;
+}
+
+#mark-cell{
+  display : none;
+}
+
+#watch-game{
+  display : none;
+}

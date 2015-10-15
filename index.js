@@ -138,33 +138,10 @@ var tttapi = {
   },
 
   //Authenticated api actions
-  listGames: function (token, callback) {
-    this.ajax({
-      method: 'GET',
-      url: this.ttt + '/games',
-      headers: {
-        Authorization: 'Token token=' + token
-      },
-      dataType: 'json',
-
-    }, callback);
-  },
-
   createGame: function (token, callback) {
     this.ajax({
       method: 'POST',
       url: this.ttt + '/games',
-      headers: {
-        Authorization: 'Token token=' + token
-      },
-      dataType: 'json',
-    }, callback);
-  },
-
-  showGame: function (id, token, callback) {
-    this.ajax({
-      method: 'GET',
-      url: this.ttt + '/games/' + id,
       headers: {
         Authorization: 'Token token=' + token
       },
@@ -275,29 +252,16 @@ $(function() {
       $('.token').val(data.user.token);
       gameExtras.myToken = data.user.token
       $(".Main").show();
-      // $(".userInfo").hide();
+      $(".userInfo").hide();
     };
     e.preventDefault();
     tttapi.login(credentials, cb);
-  });
-
-  $('#list-games').on('submit', function(e) {
-    var token = $(this).children('[name="token"]').val();
-    e.preventDefault();
-    tttapi.listGames(token, callback);
   });
 
   $('#create-game').on('submit', function(e) {
     var token = $(this).children('[name="token"]').val();
     e.preventDefault();
     tttapi.createGame(token, callback);
-  });
-
-  $('#show-game').on('submit', function(e) {
-    var token = $(this).children('[name="token"]').val();
-    var id = $('#show-id').val();
-    e.preventDefault();
-    tttapi.showGame(id, token, callback);
   });
 
   $('#join-game').on('submit', function(e) {
