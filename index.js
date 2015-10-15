@@ -233,9 +233,20 @@ $(function() {
     $('#result').val(JSON.stringify(data, null, 4));
   };
 
+   var registerCallback = function callback(error, data) {
+    if (error) {
+      console.error(error);
+      $('.loginStatus').text("Error in registration");
+      return;
+    }
+    $('.loginStatus').text("Successful registration");
+  };
+
   $('#register').on('submit', function(e) {
-    var credentials = wrap('credentials', form2object(this));
-    tttapi.register(credentials, callback);
+    var credentials = wrap('credentials', form2object(this))
+
+
+    tttapi.register(credentials, registerCallback);
     e.preventDefault(); /* should always be called with a submit event,  default is brower packs data up
                           and send to webpage server.  You want to send it to data server
                           IF SOMETHING IS CLICKABLE AND YOU ARE DOING SOMETHING IN J SCRIPT CALL this */
@@ -245,6 +256,7 @@ $(function() {
     var credentials = wrap('credentials', form2object(this));
     var cb = function cb(error, data) {
       if (error) {
+        $('.loginStatus').text("Error in login");
         callback(error);
         return;
       }

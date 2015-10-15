@@ -80,12 +80,21 @@ clear : left;
   color: midnightblue;
 }
 
+.loginStatus {
+  height: 50px;
+  width: 300px;
+  font-size: 15px;
+}
 
 #result {
   height: 200px;
   width: 400px;
   margin: 0 auto;
   display : none;
+}
+
+#register {
+  /*font-size: 50px;*/
 }
 
 #join-game {
@@ -99,3 +108,4 @@ clear : left;
 #watch-game{
   display : none;
 }
+
