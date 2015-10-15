@@ -132,10 +132,6 @@ var initializeGame = function () {
     $('.newGame').blur();
 
     gameExtras.ajaxCreateNewGame(event);
-
-    // need to replace with a callback
-    // setTimeout(updateGameID, 500);
-
     }
 
 
