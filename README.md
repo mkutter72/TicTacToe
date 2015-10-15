@@ -40,3 +40,36 @@ Java Script for controlling the behavior of the site and representing data struc
 JQuery for DOM manipulation and event handling
 AJAX for communicating with the web server
 JSON
+
+
+NewGame Logic - either player can click
+  if GameId != zero
+    EndCurrent game
+
+   Create new game - this indicates who is player X
+   Display new game ID
+
+
+join button logic
+reads the typed in game ID
+if game ID read === set gameID you are player X so just watch the game
+  this indicate double player mode for player x, otherwise single player mode
+
+if game ID read != set gameID you are player  O so join the game and then watch the game
+  put up waiting message. this indicates double player mode
+
+
+Initial state
+gameID =0
+all squares no clicks
+singleMode = true
+
+
+After game is over,  new game button
+
+Switching players single game mode
+There is no switching of players in double mode
+
+
+
+

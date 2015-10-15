@@ -1,8 +1,12 @@
 'use strict';
 
+var myExtras = myExtras || {};
+
 var gameExtras = {
   myToken: 0,
-  myGameID: 410,
+  myGameID: 0,
+  singleMode: true,
+  player: 'X',
 
 
   callback: function callback(error, data) {
@@ -30,10 +34,7 @@ var gameExtras = {
       "game" : {
         "cell" : {
           "index": index,
-          "value": value,
-        }
-      }
-    }
+          "value": value,}}}
 
     e.preventDefault();
     tttapi.markCell(this.myGameID, myData, this.myToken, this.callback);
@@ -274,6 +275,7 @@ $(function() {
       $('.token').val(data.user.token);
       gameExtras.myToken = data.user.token
       $(".Main").show();
+      // $(".userInfo").hide();
     };
     e.preventDefault();
     tttapi.login(credentials, cb);
@@ -343,7 +345,10 @@ $(function() {
     });
   });
 
+ // myExtras.initFunction();
 });
+
+
 
 
 

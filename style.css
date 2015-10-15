@@ -9,15 +9,8 @@
 
 body{
   background: url("background.jpg");
-
   background-size: 800px 800px;
-  /*background-size: 90% 270%; */
-
-  /*background-position: center;*/
-
   background-position: top -90px left 00px;
-
-  /*background-repeat: no-repeat;*/
 }
 
 h1 {
@@ -61,7 +54,6 @@ clear : left;
   height: 500px;
   width: 700px;
   background-color : none;
-  /*visibility: hidden;*/
   display: none;
 }
 
@@ -86,10 +78,13 @@ clear : left;
   width: 400px;
   font-size: 40px;
   color : darkslategray;
+   border: 2px solid;
 }
+
 
 #result {
   height: 60ex;
   width: 90%;
   margin: 0 auto;
 }
+
