@@ -41,6 +41,7 @@ JQuery for DOM manipulation and event handling
 AJAX for communicating with the web server
 JSON
 
+![alt tag](https://raw.github.com/mkutter72/TicTacToe/gh-pages/WireFrame1.jpg)
 
 NewGame Logic - either player can click
   if GameId != zero
