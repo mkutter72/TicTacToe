@@ -113,8 +113,8 @@ var initializeGame = function () {
     }
   };
 
-  var updateGameID = function () {
-    $('.winnerStatus').text('GameID: ' + gameExtras.myGameID);
+  var updateGameID = function (gameID) {
+    $('.winnerStatus').text('GameID: ' + gameID);
   };
 
   var newGameClick = function (event) {
@@ -134,7 +134,7 @@ var initializeGame = function () {
     gameExtras.ajaxCreateNewGame(event);
 
     // need to replace with a callback
-    setTimeout(updateGameID, 500);
+    // setTimeout(updateGameID, 500);
 
     }
 
@@ -142,6 +142,7 @@ var initializeGame = function () {
   // The real actions of the init() function
   $('.newGame').on('click',newGameClick);
   $('.winnerStatus').text('Click on New Game to start');
+  gameExtras['displayGameID'] = updateGameID;
   };
 
 

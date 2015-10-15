@@ -26,6 +26,7 @@ var gameExtras = {
     }
 
     gameExtras.myGameID = data.game.id;
+    gameExtras.displayGameID(gameExtras.myGameID);
     $('#result').val(JSON.stringify(data, null, 4));
   },
 
