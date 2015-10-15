@@ -56,7 +56,7 @@ BoardMatrix.prototype.checkForWinner = function checkForWinner()
   if (this.board[0][0] === this.board[1][1] && this.board[1][1]=== this.board[2][2] && this.board[1][1] !== null)
         return this.board[1][1];
 
-  if (board[0][2] === this.board[1][1] && this.board[1][1]=== this.board[2][0] && this.board[1][1] !== null)
+  if (this.board[0][2] === this.board[1][1] && this.board[1][1]=== this.board[2][0] && this.board[1][1] !== null)
         return this.board[1][1];
 
    if (nullCnt === 0)
@@ -65,91 +65,10 @@ BoardMatrix.prototype.checkForWinner = function checkForWinner()
     return false;
 };
 
-var board = [ [null, null, null],
-              [null, null, null],
-              [null, null, null]
-            ];
-
-
-function checkForWinner()
-{
-   var nullCnt = 0;
-
-   // check all rows. While you are doing row count the number of nulls
-   // if all squares are filled and there is no winner, it's a draw.
-   for (var i = 0; i < board.length; i++){
-      for (var j = 0;j < board[0].length ; j++)
-        if (!board[i][j])
-            ++nullCnt;
-
-      if (board[i][0] === board[i][1] && board[i][1]=== board[i][2] && board[i][0] !== null)
-         return board[i][0];
-   }
-
-   // Check all columns
-  for (var i = 0; i < board[0].length ; i++)
-      if (board[0][i] === board[1][i] && board[1][i]=== board[2][i] && board[0][i] !== null)
-         return board[0][i];
-
-   // check diagonals
-  if (board[0][0] === board[1][1] && board[1][1]=== board[2][2] && board[1][1] !== null)
-        return board[1][1];
-
-  if (board[0][2] === board[1][1] && board[1][1]=== board[2][0] && board[1][1] !== null)
-        return board[1][1];
-
-   if (nullCnt === 0)
-    return "Draw";
-
-    return false;
-}
-
-var clearBoard = function (){
-  $('.boardImage > div').text('');
-  $('.winnerStatus').text('');
-
-  for (var rowcnt = 0; rowcnt < board.length; rowcnt++)
-    for (var colcnt = 0; colcnt < board[0].length; colcnt++)
-      board[rowcnt][colcnt] = null;
-
-}
-
-function checkForWinner()
-{
-   var nullCnt = 0;
-
-   // check all rows. While you are doing row count the number of nulls
-   // if all squares are filled and there is no winner, it's a draw.
-   for (var i = 0; i < board.length; i++){
-      for (var j = 0;j < board[0].length ; j++)
-        if (!board[i][j])
-            ++nullCnt;
-
-      if (board[i][0] === board[i][1] && board[i][1]=== board[i][2] && board[i][0] !== null)
-         return board[i][0];
-   }
-
-   // Check all columns
-  for (var i = 0; i < board[0].length ; i++)
-      if (board[0][i] === board[1][i] && board[1][i]=== board[2][i] && board[0][i] !== null)
-         return board[0][i];
-
-   // check diagonals
-  if (board[0][0] === board[1][1] && board[1][1]=== board[2][2] && board[1][1] !== null)
-        return board[1][1];
-
-  if (board[0][2] === board[1][1] && board[1][1]=== board[2][0] && board[1][1] !== null)
-        return board[1][1];
-
-   if (nullCnt === 0)
-    return "Draw";
-
-    return false;
-}
-
-
 
 var initializeGame = function () {
+
+  var board = new BoardMatrix();
 
   var turnOnEvents = function turnOnEvents(liClickHandler){
     $('.boardImage > div').on('click',liClickHandler);
@@ -168,13 +87,13 @@ var initializeGame = function () {
 
     var row = parseInt(idStr[1]);
     var col = parseInt(idStr[2]);
-    board [row][col] = gameExtras.player;
+    board.setSquare(row,col,gameExtras.player);
 
     gameExtras.ajaxMarkCell(event,(row*3)+col,gameExtras.player);
 
     $('.winnerStatus').text('');
 
-    var winner = checkForWinner();
+    var winner = board.checkForWinner();
     if (winner){
       if (winner === 'Draw'){
         $('.winnerStatus').text('The game is a draw');
@@ -200,7 +119,9 @@ var initializeGame = function () {
   var newGameClick = function (event) {
     gameExtras.player = 'X'
     gameExtras.ajaxEndCurentGame(event);
-    clearBoard();
+    board.clearBoard();
+
+    $('.boardImage > div').text('');
 
     // Turn off the click events incase any squares weren't filled in the last game
     turnOffEvents(liClickHandler);
@@ -219,17 +140,12 @@ var initializeGame = function () {
 
   // The real actions of the init() function
   $('.newGame').on('click',newGameClick);
-
+  $('.winnerStatus').text('Click on New Game to start');
   };
 
 
  initializeGame();
- var bb = new BoardMatrix();
- bb.checkForWinner();
-bb.setSquare(0,0,'O');
-bb.setSquare(1,1,'O');
-bb.setSquare(2,2,'O');
-bb.checkForWinner();
+
 /*
 function setup()
 {

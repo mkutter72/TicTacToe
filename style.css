@@ -75,10 +75,9 @@ clear : left;
   left : 420px;
   top : -240px;
   height : 50px;
-  width: 400px;
+  width: 500px;
   font-size: 40px;
-  color : darkslategray;
-   border: 2px solid;
+  color: midnightblue;
 }
 
 
