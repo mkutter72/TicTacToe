@@ -37,11 +37,11 @@ If all squares are filled and there is no winner,  a draw game is indicated
 
 
 Technologies Used
-HTML for organizing the website layoff
-CSS for setting the appearance of the website
-Java Script for controlling the behavior of the site and representing data structures
-JQuery for DOM manipulation and event handling
-AJAX for communicating with the web server
+-HTML for organizing the website layoff
+-CSS for setting the appearance of the website
+-Java Script for controlling the behavior of the site and representing data structures
+-JQuery for DOM manipulation and event handling
+-AJAX for communicating with the web server
 
 ##Wireframe Diagrams
 ![alt tag](https://raw.github.com/mkutter72/TicTacToe/gh-pages/WireFrame1.jpg)
