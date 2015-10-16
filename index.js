@@ -2,6 +2,9 @@
 
 var myExtras = myExtras || {};
 
+var mySingleMode = true;
+var myPlayer = 'X';
+
 var gameExtras = {
   myToken: 0,
   myGameID: 0,
@@ -262,7 +265,7 @@ $(function() {
       $('.token').val(data.user.token);
       gameExtras.myToken = data.user.token
       $(".Main").show('slow');
-       $(".userInfo").hide();
+      $(".userInfo").hide();
     };
     e.preventDefault();
     tttapi.login(credentials, cb);
@@ -296,9 +299,13 @@ $(function() {
     tttapi.markCell(id, data, token, callback);
   });
 
-  $('#watch-game').on('submit', function(e){
-    var token = $(this).children('[name="token"]').val();
-    var id = $('#game-id').val();
+  $('#xxx').on('click', function(e){
+
+    debugger;
+    myExtras.singleMode = false;
+    mySingleMode = false;
+    var id = $('.mgIDClass').val();
+    var token = gameExtras.myToken;
     e.preventDefault();
 
     var gameWatcher = tttapi.watchGame(id, token);
@@ -313,8 +320,8 @@ $(function() {
       var cell = gameData.cell;
       gameExtras.otherPlayerMove(cell.index,cell.value);
 
-      $('#watch-index').val(cell.index);
-      $('#watch-value').val(cell.value);
+    gameExtras.otherPlayerMove(cell.index,cell.value);
+
     });
     gameWatcher.on('error', function(e){
       console.error('an error has occured with the stream', e);
