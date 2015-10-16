@@ -30,6 +30,17 @@ var gameExtras = {
     $('#result').val(JSON.stringify(data, null, 4));
   },
 
+ callbackWatchGame: function callbackWatchGame(error, data) {
+    if (error) {
+      $('#result').val('status: ' + error.status + ', error: ' +error.error);
+      return;
+    }
+
+
+    $('#result').val(JSON.stringify(data, null, 4));
+  },
+
+
   ajaxMarkCell: function(e,index,value){
    var myData = {
       "game" : {
@@ -52,58 +63,42 @@ var gameExtras = {
   },
 
 
-};
+  ajaxJoinGame: function(e)
+  {
+    var gID = $('.mgIDClass').val();
+    e.preventDefault();
+    tttapi.joinGame(gID, this.myToken, this.callback);
+  },
 
+  ajaxWatchGame:  function(e){
+    var gID = $('.mgIDClass').val();
+    e.preventDefault();
 
+    var gameWatcher = tttapi.watchGame(gID, this.myToken);
 
-
-var resourceWatcher = function(url, conf) {
-  var token = function(conf) {
-    return conf && (conf = conf.Authorization) &&
-      (conf = typeof conf === 'string' &&
-        conf.split('=')) &&
-      Array.isArray(conf) && conf[1];
-  };
-  url += '?token=' + token(conf);
-  url += conf.timeout ? '&timeout=' + conf.timeout : '';
-  var es = new EventSource(url);
-  var close = function() {
-    es.close();
-  };
-  var makeHandler = function(handler, close) {
-    return function(e) {
-      if (close) {
-        close();
+    gameWatcher.on('change', function(data){
+      var parsedData = JSON.parse(data);
+      if (data.timeout) { //not an error
+        this.gameWatcher.close();
+        return console.warn(data.timeout);
       }
-      return handler(e.data ? e.data : e);
-    };
-  };
+      var gameData = parsedData.game;
+      var cell = gameData.cell;
+      gameExtras.otherPlayerMove(cell.index,cell.value);
 
-  var on = function(event, handler) {
-    switch (event) {
-      case 'connect':
-        es.onopen = makeHandler(handler);
-        break;
-      case 'change':
-        es.onmessage = makeHandler(handler);
-        break;
-      case 'error':
-        es.onerror = makeHandler(handler, close);
-        break;
-      default:
-        console.error('Unknown event type:' + event);
-        break;
-    }
-  };
+      $('#watch-index').val(cell.index);
+      $('#watch-value').val(cell.value);
+    });
+    gameWatcher.on('error', function(e){
+      console.error('an error has occured with the stream', e);
+    });
+  },
 
-  return {
-    close: close,
-    on: on
-  };
+
+
+
+
 };
-
-
-
 
 
 var tttapi = {
@@ -157,6 +152,8 @@ var tttapi = {
       headers: {
         Authorization: 'Token token=' + token
       },
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({}),
       dataType: 'json',
     }, callback);
   },
@@ -264,8 +261,8 @@ $(function() {
       callback(null, data);
       $('.token').val(data.user.token);
       gameExtras.myToken = data.user.token
-      $(".Main").show();
-      $(".userInfo").hide();
+      $(".Main").show('slow');
+       $(".userInfo").hide();
     };
     e.preventDefault();
     tttapi.login(credentials, cb);
@@ -301,7 +298,7 @@ $(function() {
 
   $('#watch-game').on('submit', function(e){
     var token = $(this).children('[name="token"]').val();
-    var id = $('#watch-id').val();
+    var id = $('#game-id').val();
     e.preventDefault();
 
     var gameWatcher = tttapi.watchGame(id, token);
@@ -314,6 +311,8 @@ $(function() {
       }
       var gameData = parsedData.game;
       var cell = gameData.cell;
+      gameExtras.otherPlayerMove(cell.index,cell.value);
+
       $('#watch-index').val(cell.index);
       $('#watch-value').val(cell.value);
     });

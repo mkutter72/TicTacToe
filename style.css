@@ -109,3 +109,9 @@ clear : left;
   display : none;
 }
 
+.twoplayer {
+  position: relative;
+  left : 420px;
+  top : -350px;
+
+}

@@ -26,12 +26,15 @@
 
 ##Design Choices
 The board used for tracking moves will be represented by a 3x3 array
+This board is represented by a class BoardMatrix coded with a constructor and prototype methods thereby encapsulating the board data.
 
-Definition of a win.   A player is considered a winner if they have any of the following combinations
-of 2 consecutive squares filled with their indicator (X or O)
+Definition of a win.   A player is considered a winner if they have any of the following combinations of 2 consecutive squares filled with their indicator (X or O)
   -All squares in row 1 , 2 or 3
   -All squares in column 1, 2 or 3
   -All squares in either diagonal
+
+If all squares are filled and there is no winner,  a draw game is indicated
+
 
 Technologies Used
 HTML for organizing the website layoff
@@ -39,37 +42,11 @@ CSS for setting the appearance of the website
 Java Script for controlling the behavior of the site and representing data structures
 JQuery for DOM manipulation and event handling
 AJAX for communicating with the web server
-JSON
 
+##Wireframe Diagrams
 ![alt tag](https://raw.github.com/mkutter72/TicTacToe/gh-pages/WireFrame1.jpg)
 
-NewGame Logic - either player can click
-  if GameId != zero
-    EndCurrent game
 
-   Create new game - this indicates who is player X
-   Display new game ID
-
-
-join button logic
-reads the typed in game ID
-if game ID read === set gameID you are player X so just watch the game
-  this indicate double player mode for player x, otherwise single player mode
-
-if game ID read != set gameID you are player  O so join the game and then watch the game
-  put up waiting message. this indicates double player mode
-
-
-Initial state
-gameID =0
-all squares no clicks
-singleMode = true
-
-
-After game is over,  new game button
-
-Switching players single game mode
-There is no switching of players in double mode
 
 
 

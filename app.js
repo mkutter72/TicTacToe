@@ -135,10 +135,43 @@ var initializeGame = function () {
     }
 
 
+  $('#joinMyGame').on('click', function(event) {
+    gameExtras.ajaxJoinGame(event);
+    });
+
+   $('#xxx').on('click', function(event) {
+    gameExtras.ajaxWatchGame(event);
+    });
+
+
+
+  var otherPlayerMove = function(index, value){
+    var myRow;
+    var myCol;
+    // transform the server board to my board space
+    if (index < 3){
+      myRow = 0;
+      myCol = index;
+    } else
+    if (index < 6) {
+      myRow = 1;
+      myCol = index - 3;
+    } else {
+      myRow = 2;
+      myCol = index - 6
+    }
+
+    var zz = index;
+    var yy = value;
+  };
+
   // The real actions of the init() function
   $('.newGame').on('click',newGameClick);
   $('.winnerStatus').text('Click on New Game to start');
+
+  // Add important functions to gameExtras so index.js can call them
   gameExtras['displayGameID'] = updateGameID;
+  gameExtras['otherPlayerMove'] = otherPlayerMove;
   };
 
 
@@ -155,3 +188,5 @@ setup();
 
   },
 };*/
+
+
