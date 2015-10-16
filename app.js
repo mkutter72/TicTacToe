@@ -67,7 +67,6 @@ BoardMatrix.prototype.checkForWinner = function checkForWinner()
 
 
 var initializeGame = function () {
-
   var board = new BoardMatrix();
 
   var turnOnEvents = function turnOnEvents(liClickHandler){
@@ -78,18 +77,16 @@ var initializeGame = function () {
     $('.boardImage > div').off('click',liClickHandler);
   }
 
-  var liClickHandler = function liClick(event) {
-    event.target.textContent = gameExtras.player;
-    var idStr = event.target.id;
+  var processMove = function(row,col,value,sendResponse){
+debugger;
+    var jqStr = '#C'+row+col;
+    $(jqStr).off('click',liClickHandler);
+    $(jqStr).text(value);
 
-    // Since the square has been selected,  turn the click handler off
-    $('#'+idStr).off('click',liClickHandler);
 
-    var row = parseInt(idStr[1]);
-    var col = parseInt(idStr[2]);
-    board.setSquare(row,col,gameExtras.player);
+    board.setSquare(row,col,myPlayer);
 
-    gameExtras.ajaxMarkCell(event,(row*3)+col,gameExtras.player);
+    gameExtras.ajaxMarkCell(event,(row*3)+col,myPlayer);
 
     $('.winnerStatus').text('');
 
@@ -98,19 +95,29 @@ var initializeGame = function () {
       if (winner === 'Draw'){
         $('.winnerStatus').text('The game is a draw');
       } else {
-        $('.winnerStatus').text('Player ' + gameExtras.player  +' has won!');
+        $('.winnerStatus').text('Player ' + myPlayer  +' has won!');
       }
 
       turnOffEvents(liClickHandler);
       gameExtras.ajaxEndCurentGame(event);
       }
 
-    if (gameExtras.singleMode){
-      if (gameExtras.player === 'O')
-        gameExtras.player = 'X';
+    if (mySingleMode){
+      if (myPlayer === 'O')
+        myPlayer = 'X';
       else
-         gameExtras.player = 'O';
+         myPlayer = 'O';
     }
+
+  }
+
+  var liClickHandler = function liClick(event) {
+  //  event.target.textContent = gameExtras.player;
+    var idStr = event.target.id;
+
+    var row = parseInt(idStr[1]);
+    var col = parseInt(idStr[2]);
+    processMove(row,col,myPlayer,true);
   };
 
   var updateGameID = function (gameID) {
@@ -118,7 +125,7 @@ var initializeGame = function () {
   };
 
   var newGameClick = function (event) {
-    gameExtras.player = 'X'
+    myPlayer = 'X'
 
     board.clearBoard();
 
@@ -136,18 +143,20 @@ var initializeGame = function () {
 
 
   $('#joinMyGame').on('click', function(event) {
+    myPlayer = 'O';
+    turnOnEvents(liClickHandler);
     gameExtras.ajaxJoinGame(event);
     });
-
-   $('#xxx').on('click', function(event) {
-    gameExtras.ajaxWatchGame(event);
-    });
-
 
 
   var otherPlayerMove = function(index, value){
     var myRow;
     var myCol;
+    debugger;
+
+    if (value === myPlayer)
+      return;
+
     // transform the server board to my board space
     if (index < 3){
       myRow = 0;
@@ -161,8 +170,8 @@ var initializeGame = function () {
       myCol = index - 6
     }
 
-    var zz = index;
-    var yy = value;
+    processMove(myRow,myCol,value,false);
+
   };
 
   // The real actions of the init() function
