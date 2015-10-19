@@ -37,7 +37,7 @@ If all squares are filled and there is no winner,  a draw game is indicated
 
 
 Technologies Used
-* HTML for organizing the website layoff
+* HTML for organizing the website layout
 * CSS for setting the appearance of the website
 * Java Script for controlling the behavior of the site and representing data structures
 * JQuery for DOM manipulation and event handling
@@ -49,5 +49,22 @@ Technologies Used
 
 
 
+##Running with Two Players:
+Either player can go first after the game is setup.  After the first move, a waiting message is displayed while the other player makes their choice.
+
+Player X is determined by who creates the game.
+To play as Player X:
+1. Log in
+2. Click the New Game Button
+3. Type the new game ID into the input box
+4. Click the Watch Game button
+
+Player O is determined by who runs the Join
+To play as Player O:
+1. Log in
+2. Get the Game ID from Player X
+3. Type the ID into input box
+4. Click the Join Button
+5. Click the Watch Game Button
 
 
