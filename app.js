@@ -88,8 +88,6 @@ var initializeGame = function () {
     if (myPlayer === value)
       gameExtras.ajaxMarkCell(event,(row*3)+col,myPlayer);
 
-    $('.winnerStatus').text('');
-
     var winner = board.checkForWinner();
     if (winner){
       if (winner === 'Draw'){
@@ -117,6 +115,10 @@ var initializeGame = function () {
 
     var row = parseInt(idStr[1]);
     var col = parseInt(idStr[2]);
+
+    if (!mySingleMode)
+      $('.winnerStatus').text('Waiting for other player');
+
     processMove(row,col,myPlayer,true);
   };
 
@@ -173,6 +175,9 @@ var initializeGame = function () {
       myRow = 2;
       myCol = index - 6
     }
+
+    if (!mySingleMode)
+      $('.winnerStatus').text('');
 
     processMove(myRow,myCol,value,false);
 
