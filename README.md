@@ -54,6 +54,7 @@ Either player can go first after the game is setup.  After the first move, a wai
 
 Player X is determined by who creates the game.
 To play as Player X:
+
 1. Log in
 1. Click the New Game Button
 1. Type the new game ID into the input box
@@ -61,6 +62,7 @@ To play as Player X:
 
 Player O is determined by who runs the Join
 To play as Player O:
+
 1. Log in
 1. Get the Game ID from Player X
 1. Type the ID into input box
