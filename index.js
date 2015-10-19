@@ -68,9 +68,10 @@ var gameExtras = {
 
   ajaxJoinGame: function(e)
   {
-    var gID = $('.mgIDClass').val();
+    gameExtras.myGameID = $('.mgIDClass').val();
     e.preventDefault();
-    tttapi.joinGame(gID, this.myToken, this.callback);
+    tttapi.joinGame(
+    gameExtras.myGameID, this.myToken, this.callback);
   },
 
   ajaxWatchGame:  function(e){
@@ -300,8 +301,6 @@ $(function() {
   });
 
   $('#xxx').on('click', function(e){
-
-    debugger;
     myExtras.singleMode = false;
     mySingleMode = false;
     var id = $('.mgIDClass').val();
