@@ -78,15 +78,15 @@ var initializeGame = function () {
   }
 
   var processMove = function(row,col,value,sendResponse){
-debugger;
     var jqStr = '#C'+row+col;
     $(jqStr).off('click',liClickHandler);
     $(jqStr).text(value);
 
 
-    board.setSquare(row,col,myPlayer);
+    board.setSquare(row,col,value);
 
-    gameExtras.ajaxMarkCell(event,(row*3)+col,myPlayer);
+    if (myPlayer === value)
+      gameExtras.ajaxMarkCell(event,(row*3)+col,myPlayer);
 
     $('.winnerStatus').text('');
 
@@ -95,7 +95,7 @@ debugger;
       if (winner === 'Draw'){
         $('.winnerStatus').text('The game is a draw');
       } else {
-        $('.winnerStatus').text('Player ' + myPlayer  +' has won!');
+        $('.winnerStatus').text('Player ' + winner +' has won!');
       }
 
       turnOffEvents(liClickHandler);
@@ -124,11 +124,11 @@ debugger;
     $('.winnerStatus').text('GameID: ' + gameID);
   };
 
+// In double play New Game indicate you are player X start a new
+// game,  Play X is the game creator
   var newGameClick = function (event) {
     myPlayer = 'X'
-
     board.clearBoard();
-
     $('.boardImage > div').text('');
 
     // Turn off the click events incase any squares weren't filled in the last game
@@ -137,13 +137,18 @@ debugger;
 
     // Reset the focus off the button
     $('.newGame').blur();
-
     gameExtras.ajaxCreateNewGame(event);
     }
 
 
+// in double play Join game indicates you are play 0 starting a new game
   $('#joinMyGame').on('click', function(event) {
     myPlayer = 'O';
+    board.clearBoard();
+    $('.boardImage > div').text('');
+
+    // Turn off the click events incase any squares weren't filled in the last game
+    turnOffEvents(liClickHandler);
     turnOnEvents(liClickHandler);
     gameExtras.ajaxJoinGame(event);
     });
@@ -152,7 +157,6 @@ debugger;
   var otherPlayerMove = function(index, value){
     var myRow;
     var myCol;
-    debugger;
 
     if (value === myPlayer)
       return;
