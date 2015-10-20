@@ -145,6 +145,7 @@ var initializeGame = function () {
 
 // in double play Join game indicates you are play 0 starting a new game
   $('#joinMyGame').on('click', function(event) {
+    $('#joinMyGame').blur();
     gameExtras.player = 'O';
     board.clearBoard();
     $('.boardImage > div').text('');

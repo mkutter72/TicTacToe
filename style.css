@@ -57,14 +57,16 @@ clear : left;
   display: none;
 }
 
-
 .newGame{
   position: relative;
-  left : 420px;
-  top : -130px;
-  font-size: 20px;
-  height : 50px;
-  width: 150px;
+    left : 420px;
+    top : -130px;
+}
+
+*[type="button"] {
+  font-size: 15px;
+  height : 35px;
+  width: 130px;
   border: 2px solid;
   border-radius: 10px;
   background-color: white;
@@ -93,10 +95,6 @@ clear : left;
   display : none;
 }
 
-#register {
-  /*font-size: 50px;*/
-}
-
 #join-game {
   display : none;
 }
@@ -113,5 +111,11 @@ clear : left;
   position: relative;
   left : 420px;
   top : -350px;
+
+}
+
+.mgIDClass {
+  width : 130px;
+  font-size: 15px;
 
 }

@@ -297,7 +297,7 @@ $(function() {
   });
 
   $('#xxx').on('click', function(e){
-    gameExtras.singleMode = false;
+     $('#xxx').blur();
     gameExtras.singleMode = false;
     var id = $('.mgIDClass').val();
     var token = gameExtras.myToken;
