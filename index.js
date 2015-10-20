@@ -1,9 +1,5 @@
 'use strict';
 
-var myExtras = myExtras || {};
-
-var mySingleMode = true;
-var myPlayer = 'X';
 
 var gameExtras = {
   myToken: 0,
@@ -301,8 +297,8 @@ $(function() {
   });
 
   $('#xxx').on('click', function(e){
-    myExtras.singleMode = false;
-    mySingleMode = false;
+    gameExtras.singleMode = false;
+    gameExtras.singleMode = false;
     var id = $('.mgIDClass').val();
     var token = gameExtras.myToken;
     e.preventDefault();
@@ -326,8 +322,6 @@ $(function() {
       console.error('an error has occured with the stream', e);
     });
   });
-
- // myExtras.initFunction();
 });
 
 

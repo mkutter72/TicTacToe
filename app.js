@@ -85,8 +85,8 @@ var initializeGame = function () {
 
     board.setSquare(row,col,value);
 
-    if (myPlayer === value)
-      gameExtras.ajaxMarkCell(event,(row*3)+col,myPlayer);
+    if (gameExtras.player === value)
+      gameExtras.ajaxMarkCell(event,(row*3)+col,gameExtras.player);
 
     var winner = board.checkForWinner();
     if (winner){
@@ -100,11 +100,11 @@ var initializeGame = function () {
       gameExtras.ajaxEndCurentGame(event);
       }
 
-    if (mySingleMode){
-      if (myPlayer === 'O')
-        myPlayer = 'X';
+    if (gameExtras.singleMode){
+      if (gameExtras.player === 'O')
+        gameExtras.player = 'X';
       else
-         myPlayer = 'O';
+         gameExtras.player = 'O';
     }
 
   }
@@ -116,10 +116,10 @@ var initializeGame = function () {
     var row = parseInt(idStr[1]);
     var col = parseInt(idStr[2]);
 
-    if (!mySingleMode)
+    if (!gameExtras.singleMode)
       $('.winnerStatus').text('Waiting for other player');
 
-    processMove(row,col,myPlayer,true);
+    processMove(row,col,gameExtras.player,true);
   };
 
   var updateGameID = function (gameID) {
@@ -129,7 +129,7 @@ var initializeGame = function () {
 // In double play New Game indicate you are player X start a new
 // game,  Play X is the game creator
   var newGameClick = function (event) {
-    myPlayer = 'X'
+    gameExtras.player = 'X'
     board.clearBoard();
     $('.boardImage > div').text('');
 
@@ -145,7 +145,7 @@ var initializeGame = function () {
 
 // in double play Join game indicates you are play 0 starting a new game
   $('#joinMyGame').on('click', function(event) {
-    myPlayer = 'O';
+    gameExtras.player = 'O';
     board.clearBoard();
     $('.boardImage > div').text('');
 
@@ -160,7 +160,7 @@ var initializeGame = function () {
     var myRow;
     var myCol;
 
-    if (value === myPlayer)
+    if (value === gameExtras.player)
       return;
 
     // transform the server board to my board space
@@ -176,7 +176,7 @@ var initializeGame = function () {
       myCol = index - 6
     }
 
-    if (!mySingleMode)
+    if (!gameExtras.singleMode)
       $('.winnerStatus').text('');
 
     processMove(myRow,myCol,value,false);
@@ -195,16 +195,5 @@ var initializeGame = function () {
 
  initializeGame();
 
-/*
-function setup()
-{
-myExtras['initFunction'] = initializeBoard;
-}
-
-setup();
- /* cellFromOponent : function (value, index) {
-
-  },
-};*/
 
 

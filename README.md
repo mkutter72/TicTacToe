@@ -47,9 +47,15 @@ Technologies Used
 ![alt tag](https://raw.github.com/mkutter72/TicTacToe/gh-pages/WireFrame1.jpg)
 
 
+##Playing in one web browser:
+1. Log in
+1. Click the New Game Button
+1. Play the game, click on the squares.  Play will alternate between X and 0.
+1. When the game completes, Click the New Game Button to play again
 
 
-##Running with Two Players:
+
+##Playing in two web browsers, one for each player:
 Either player can go first after the game is setup.  After the first move, a waiting message is displayed while the other player makes their choice.
 
 Player X is determined by who creates the game.
@@ -59,6 +65,7 @@ To play as Player X:
 1. Click the New Game Button
 1. Type the new game ID into the input box
 1. Click the Watch Game button
+1. Click on squares, wait while the waiting for other player message is displayed
 
 Player O is determined by who runs the Join
 To play as Player O:
@@ -68,5 +75,5 @@ To play as Player O:
 1. Type the ID into input box
 1. Click the Join Button
 1. Click the Watch Game Button
-
+1. Click on squares, wait while the waiting for other player message is displayed
 
