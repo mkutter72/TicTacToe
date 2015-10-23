@@ -1,5 +1,6 @@
 'use strict';
 
+var externAppsFunctions = externAppsFunctions || {};
 
 var gameExtras = {
   myToken: 0,
@@ -322,6 +323,8 @@ $(function() {
       console.error('an error has occured with the stream', e);
     });
   });
+
+  externAppsFunctions.initApps();
 });
 
 

@@ -1,5 +1,7 @@
 'use strict';
 
+var externAppsFunctions = externAppsFunctions || {};
+
 
 var BoardMatrix = function BoardMatrix()
 {
@@ -194,7 +196,7 @@ var initializeGame = function () {
   };
 
 
- initializeGame();
 
-
+// Setup so index.js file can call this
+externAppsFunctions['initApps'] = initializeGame;
 
